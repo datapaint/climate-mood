@@ -56,7 +56,7 @@ def mood_verbosity():
 
     tdf['Verbosity'] = tdf['Tweets'].str.len()
 
-    mood_v = pd.DataFrame({'Positive': tdf[tdf['Polarity'] > 0]['Verbosity'].mean(), 
+    mood_v = pd.DataFrame({'Positive': tdf[tdf['Polarity'] > 0]['Verbosity'].mean(),
                            'Neutral': tdf[tdf['Polarity'] == 0]['Verbosity'].mean(),
                            'Negative': tdf[tdf['Polarity'] < 0]['Verbosity'].mean()
                          }, index=[0])
@@ -92,10 +92,10 @@ app.layout = html.Div(children=[
         html.H1(children='Climate Mood'),
         html.Div(children=['''
             Hourly Twitter sentiment analysis on climate change
-        ''', 
+        ''',
 
             html.A(html.Button('Source Code!'),
-                href='https://github.com/warmdata/climate-mood',
+                href='https://github.com/okstoic/climate-mood',
             ),
         ], className='description'),
     ], className='navigation'),

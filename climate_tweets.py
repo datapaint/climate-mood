@@ -43,14 +43,15 @@ def tweets_to_db():
             utfArray.append(tweet.text.encode("utf-8"))
 
         # Cleaning a Tweet String
-        def cleanTweet(tweet):
+        def cleanTweet(tw):
             # Remove Links, Special Characters etc from tweet
-            return ' '.join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",tweet).split())
+            return ' '.join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)"," ",tw).split())
 
         # Perform Sentiment Analysis
         for tweet in tweetsArray:
-            t = cleanTweet(tweet)
-            # DO ANALYSIS HERE
+            t = TextBlob(cleanTweet(tweet))
+            polarityVal.append(t.sentiment.polarity)
+            subjectivityVal.append(t.sentiment.subjectivity)
 
         # Create pandas dataframe from arrays
         tweet_frame = pd.DataFrame({"Tweets":tweetsArray, "TimeStamp":timestampArray, "UTF_Offset":utfArray, "Polarity":polarityVal, "Subjectivity":subjectivityVal}, columns=["Tweets", "TimeStamp", "UTF_Offset", "Polarity", "Subjectivity"])

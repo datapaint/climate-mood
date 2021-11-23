@@ -6,8 +6,6 @@ import dash_html_components as html
 import pandas as pd
 from pandas.tseries.offsets import *
 import plotly.graph_objs as go
-#from numpy import arange,array,ones
-from scipy import stats
 import psycopg2
 from sqlalchemy import create_engine
 from datetime import datetime

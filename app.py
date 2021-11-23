@@ -93,10 +93,6 @@ app.layout = html.Div(children=[
         html.Div(children=['''
             Hourly Twitter sentiment analysis on climate change
         ''',
-
-            html.A(html.Button('Source Code!'),
-                href='https://github.com/okstoic/climate-mood',
-            ),
         ], className='description'),
     ], className='navigation'),
 

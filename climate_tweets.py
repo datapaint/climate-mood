@@ -35,13 +35,13 @@ def tweets_to_db():
 
         #Get the tweets
         tweets = tweepy.Cursor(api.search, q='climate change -filter:retweets -filter:replies', lang='en').items(2000)
-	
+
         # Creating a list of String Tweets
         for tweet in tweets:
             tweetsArray.append(tweet.text)
             timestampArray.append(tweet.created_at)
             utfArray.append(tweet.text.encode("utf-8"))
-	
+
         # Cleaning a Tweet String
         def cleanTweet(tweet):
             # Remove Links, Special Characters etc from tweet
@@ -50,9 +50,7 @@ def tweets_to_db():
         # Perform Sentiment Analysis
         for tweet in tweetsArray:
             t = cleanTweet(tweet)
-            analysis = TextBlob(t)
-            polarityVal.append(analysis.sentiment.polarity)
-            subjectivityVal.append(analysis.sentiment.subjectivity)
+            # DO ANALYSIS HERE
 
         # Create pandas dataframe from arrays
         tweet_frame = pd.DataFrame({"Tweets":tweetsArray, "TimeStamp":timestampArray, "UTF_Offset":utfArray, "Polarity":polarityVal, "Subjectivity":subjectivityVal}, columns=["Tweets", "TimeStamp", "UTF_Offset", "Polarity", "Subjectivity"])
@@ -60,7 +58,7 @@ def tweets_to_db():
         # Connect to Heroku and write to db
         engine = create_engine(tweet_db_url)
         tweet_frame.to_sql('tweets', con=engine, if_exists='replace')
-	
+
         pass
 
 
